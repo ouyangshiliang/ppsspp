@@ -133,6 +133,8 @@ struct VKRComputePipeline {
 };
 
 struct CompileQueueEntry {
+	CompileQueueEntry(VKRGraphicsPipeline *p) : type(Type::GRAPHICS), graphics(p) {}
+	CompileQueueEntry(VKRComputePipeline *p) : type(Type::COMPUTE), compute(p) {}
 	enum class Type {
 		GRAPHICS,
 		COMPUTE,
@@ -173,7 +175,7 @@ public:
 		VKRGraphicsPipeline *pipeline = new VKRGraphicsPipeline();
 		pipeline->desc = desc;
 		compileMutex_.lock();
-		compileQueue_.push_back(CompileQueueEntry{ CompileQueueEntry::Type::GRAPHICS, pipeline, nullptr });
+		compileQueue_.push_back(CompileQueueEntry(pipeline));
 		compileCond_.notify_one();
 		compileMutex_.unlock();
 		return pipeline;
@@ -183,7 +185,7 @@ public:
 		VKRComputePipeline *pipeline = new VKRComputePipeline();
 		pipeline->desc = desc;
 		compileMutex_.lock();
-		compileQueue_.push_back(CompileQueueEntry{ CompileQueueEntry::Type::COMPUTE, nullptr, pipeline });
+		compileQueue_.push_back(CompileQueueEntry(pipeline));
 		compileCond_.notify_one();
 		compileMutex_.unlock();
 		return pipeline;
