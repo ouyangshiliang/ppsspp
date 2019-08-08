@@ -740,6 +740,9 @@
     <ClCompile Include="HLE\sceUsbMic.cpp">
       <Filter>HLE\Libraries</Filter>
     </ClCompile>
+    <ClCompile Include="HLE\sceKernelHeap.cpp">
+      <Filter>HLE\Kernel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ELF\ElfReader.h">
@@ -1372,6 +1375,9 @@
     </ClInclude>
     <ClInclude Include="HLE\sceUsbMic.h">
       <Filter>HLE\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="HLE\sceKernelHeap.h">
+      <Filter>HLE\Kernel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
